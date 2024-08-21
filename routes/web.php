@@ -15,3 +15,15 @@ use App\Http\Controllers\SalesController;
 |
 */
 
+Route::get('/inicio', function () {
+    return view('welcome');
+});
+
+Route::resource('movies', MoviesController::class);
+Route::get('/movies',[MoviesController::class,'index'])->name('movies.index');
+
+Route::resource('sales',SalesController::class);
+Route::get('/sales',[SalesController::class,'index'])->name('sales.index');
+
+Route::resource('rooms', RoomsController::class);
+Route::get('/rooms',[RoomsController::class,'index'])->name('rooms.index');

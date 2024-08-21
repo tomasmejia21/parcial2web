@@ -13,12 +13,15 @@
     <div class="container text-center mt-4">
         <form action="{{ route('sales.store') }}" method="POST">
             @csrf
-            <!--
-                ----------
-                --------
-                ---------
-            -->
-            
+            <div class="form-group">
+                <label class="mt-4">Seleccione la pelicula
+                    <select name="movie_id" class="form-control">
+                        @foreach ($movies as $movie)
+                            <option value="{{ $movie->id }}">{{ $movie->title }}</option>
+                        @endforeach
+                    </select>
+                </label>
+            </div>
             <div class="form-group">
                 <label class="mt-4">Seleccione la sala
                     <select name="room_id" class="form-control">
@@ -48,11 +51,23 @@
                 </tr>
             </thead>
             <tbody>
-                <!--
-                ----------
-                --------
-                ---------
-            -->
+            @foreach ($sales as $sale)
+                    <tr>
+                        <td>{{ $sale->id }}</td>
+                        <td>{{ $sale->value }}</td>
+                        <td>{{ $sale->created_at }}</td>
+                        <td>{{ $sale->movie }}</td>
+                        <td>{{ $sale->room }}</td>
+                        <td>
+                            <a href="{{ route('sales.edit', $sale->id) }}" class="btn btn-warning">Editar</a>
+                            <form action="{{ route('sales.destroy', $sale->id) }}" method="POST" style="display: inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             
             </tbody>
         </table>
