@@ -16,9 +16,9 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->integer("value");
-            $table->string("movie");
+            $table->unsignedBigInteger("movie");
             $table->foreign("movie")->references("id")->on("movies");
-            $table->string("room");
+            $table->unsignedBigInteger("room");
             $table->foreign("room")->references("id")->on("rooms");
             $table->timestamps();
         });
